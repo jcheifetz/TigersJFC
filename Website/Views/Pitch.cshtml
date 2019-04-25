@@ -1,0 +1,68 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using System.Globalization;
+@{
+    Layout = "WebsiteMaster.cshtml";
+
+
+
+    //var date = new DateTime(Model.Parent.Value<DateTime>("date").Year, Model.Parent.Value<DateTime>("date").Month, Model.Parent.Value<DateTime>("date").Day, int.Parse(Model.Name.Split(':')[0]), int.Parse(Model.Name.Split(':')[1]),0);
+    var fixtures = Model.Children;
+
+
+    @section heading {
+        <h2 class="subheading">@(Model.Parent.Value<DateTime>("date").ToString("dddd")) - @(Model.Name)</h2>
+    }
+    @*
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </table>
+        *@
+    <ul class="">
+        @foreach (var fixture in fixtures)
+        {
+            string startTime = fixture.Name;
+            bool isTigers = fixture.ContentType.Alias.IndexOf("Tigers") != -1;
+            string homeTeamName = fixture.Value<IPublishedContent>("homeTeam") != null ? fixture.Value<IPublishedContent>("homeTeam").Name : "";
+            string homeTeamGroup = isTigers ? "("+fixture.Value<string>("homeTeamGroup").Replace("Group ","")+")" : "";
+
+
+            string awayTeam = fixture.Value<IPublishedContent>("awayTeam") != null ? fixture.Value<IPublishedContent>("awayTeam").Name : "";
+            string awayTeamGroup = isTigers ? "("+fixture.Value<string>("awayTeamGroup").Replace("Group ","")+")" : "";
+
+
+
+
+            <li><a class="" href="javascript:">@(startTime) @(homeTeamName) @(homeTeamGroup) - vs - @(awayTeam) @(awayTeamGroup)</a></li>
+        }
+
+    </ul>
+
+}

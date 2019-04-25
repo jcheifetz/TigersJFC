@@ -1,0 +1,43 @@
+﻿@inherits UmbracoViewPage
+@using System.Collections.Generic;
+@using System.Linq;
+@{
+
+    var root = Umbraco.ContentAtRoot().First();
+    var days = root.ChildrenOfType("day");
+
+
+    foreach (var node in root.Children(x => x.ContentType.Alias == "textPage"))
+    {
+        <li class="nav-item @if (Model.Id == node.Id) {<text>active</text>}">
+            <a href="@(node.Url)" class="nav-link">@(node.Name) @if (Model.Id == node.Id)
+            {<span class="sr-only">(current)</span>}</a>
+        </li>
+    }
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="javascript:" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Fixtures
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            @foreach (var day in days)
+            {
+                <li>
+                    <a class="dropdown-item dropdown-toggle" href="javascript:">@(day.Value<DateTime>("date").ToString("dddd"))</a>
+                    <ul class="dropdown-menu">
+                        @foreach (var pitch in day.Children)
+                        {
+
+                            <li>
+                                <a class="dropdown-item" href="@(pitch.Url)">@(pitch.Name)</a>
+
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+            }
+        </ul>
+    </li>
+
+}
