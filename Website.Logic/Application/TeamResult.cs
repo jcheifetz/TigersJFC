@@ -136,15 +136,20 @@ namespace Website.Logic.Application
 
         public int CompareTo(TeamResult other)
         {
+
             if (this.Points == other.Points) {
 
                 if (this.GoalDifference== other.GoalDifference)
                 {
-                    return this.Goals > other.Goals ? 1 : -1;
+                    if (this.Goals == other.Goals)
+                    {
+                        return 0;
+                    }
+                    return this.Goals > other.Goals ? -1 : 1;
                 }
-                return this.GoalDifference > other.GoalDifference ? 1 : -1;
+                return this.GoalDifference > other.GoalDifference ? -1 : 1;
             }
-            return this.Points > other.Points ? 1 : -1;
+            return this.Points > other.Points ? -1 : 1;
         }
     }
 }

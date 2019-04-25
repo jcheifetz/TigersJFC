@@ -15,24 +15,50 @@
 
     @Html.Action("ResultsTable", "Partials")
 
-    <ul class="">
-        @foreach (var fixture in fixtures)
-        {
-            string startTime = fixture.Name;
-            bool isTigers = fixture.ContentType.Alias.IndexOf("Tigers") != -1;
-            string homeTeamName = fixture.Value<IPublishedContent>("homeTeam") != null ? fixture.Value<IPublishedContent>("homeTeam").Name : "";
-            string homeTeamGroup = isTigers ? "("+fixture.Value<string>("homeTeamGroup").Replace("Group ","")+")" : "";
+
+    <table class="table table-striped">
+        <thead class="sr-only">
+            <tr>
+                <th scope="col" class="text-right">Home Teame</th>
+                <th scope="col" class="text-center">Status</th>
+                <th scope="col">AwayTeam</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var fixture in fixtures)
+            {
+                string startTime = fixture.Name;
+                bool isTigers = fixture.ContentType.Alias.IndexOf("Tigers") != -1;
+                string homeTeamName = fixture.Value<IPublishedContent>("homeTeam") != null ? fixture.Value<IPublishedContent>("homeTeam").Name : "";
+                string homeTeamGroup = isTigers ? "(" + fixture.Value<string>("homeTeamGroup").Replace("Group ", "") + ")" : "";
+                int homeTeamGoals = fixture.Value<int?>("homeTeamGoals") ?? 0;
+                int awayTeamGoals = fixture.Value<int?>("awayTeamGoals") ?? 0;
+
+                bool finished = (fixture.Value<string>("status") ?? "").ToLower().IndexOf("ended") != -1;
+                bool started = finished || (fixture.Value<string>("status") ?? "").ToLower().IndexOf("started") != -1;
 
 
-            string awayTeam = fixture.Value<IPublishedContent>("awayTeam") != null ? fixture.Value<IPublishedContent>("awayTeam").Name : "";
-            string awayTeamGroup = isTigers ? "("+fixture.Value<string>("awayTeamGroup").Replace("Group ","")+")" : "";
 
+                string awayTeam = fixture.Value<IPublishedContent>("awayTeam") != null ? fixture.Value<IPublishedContent>("awayTeam").Name : "";
+                string awayTeamGroup = isTigers ? "(" + fixture.Value<string>("awayTeamGroup").Replace("Group ", "") + ")" : "";
 
+                <tr>
+                    <th scope="row" class="text-right">@(homeTeamName) @(homeTeamGroup)</th>
+                    <td class="text-center">
+                        @if (started)
+                        {
+                            <span style="min-width: 100px; text-align: center; display: inline-block; padding: 3px 0px; background-color: #ff5555; color: #fff; font-weight: bold;">@(homeTeamGoals) <text>:</text> @(awayTeamGoals)</span>
+                        }
+                        else
+                        {
+                            <span style="min-width: 100px; text-align: center; display: inline-block; padding: 3px 0px; background-color: #dddddd; font-weight: bold;">@(startTime)</span>
+                        }
+                    </td>
+                    <td>@(awayTeam) @(awayTeamGroup)</td>
+                </tr>
 
-
-            <li><a class="" href="javascript:">@(startTime) @(homeTeamName) @(homeTeamGroup) - vs - @(awayTeam) @(awayTeamGroup)</a></li>
-        }
-
-    </ul>
-
-}
+            }
+        </tbody>
+    </table>
+    }

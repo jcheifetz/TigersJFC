@@ -33,9 +33,9 @@
             int awayTeamGoals = fixture.Value<int?>("awayTeamGoals") ?? 0;
 
             var homeTeamResult = results.Single(x => x.Id == homeTeam.Id);
-            var awayTeamResult = results.Single(x => x.Id == homeTeam.Id);
+            var awayTeamResult = results.Single(x => x.Id == awayTeam.Id);
 
-            bool finished = fixture.Value<bool?>("finished") ?? false;
+            bool finished = (fixture.Value<string>("status") ?? "").ToLower().IndexOf("ended")!=-1;
 
             if (homeTeamGoals > 0)
             {
@@ -72,7 +72,7 @@
                 {
                     awayTeamResult.Won++;
                     awayTeamResult.Points += 3;
-                    homeTeamResult.GoalDifference = awayTeamGoals - homeTeamGoals;
+                    awayTeamResult.GoalDifference = awayTeamGoals - homeTeamGoals;
                 }
                 if (awayTeamGoals == homeTeamGoals)
                 {
@@ -87,7 +87,7 @@
         }
     }
 
-    //results.Sort();
+    results.Sort();
 }
 
 <table class="table table-striped">
@@ -113,12 +113,12 @@
                 {
         <tr>
             <th scope="row">@(i)</th>
-            <th>@(result.Name)</th>
+            <td>@(result.Name)</td>
             <td>@(result.Played)</td>
             <td>@(result.Won)</td>
             <td>@(result.Drew)</td>
             <td>@(result.Lost)</td>
-            <td>@(result.Goals)</td>
+            <td>@(result.GoalDifference)</td>
             <td>@(result.Points)</td>
         </tr>
                     }
