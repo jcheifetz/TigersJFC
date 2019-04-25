@@ -4,9 +4,7 @@ using System.Collections.Generic;
 
 namespace Website.Logic.Models.Partial_Models
 {
-
-
-    public class MenuModel : ContentModel
+   public class MenuModel : ContentModel
     {
         public MenuModel(IPublishedContent content) : base(content)
         {

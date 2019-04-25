@@ -7,24 +7,33 @@ using System.Linq;
 using System;
 
 
-namespace Website.Logic.Controllers.Partial_Controllers
+namespace Website.Logic.Controllers
 {
-    class MenuController : SurfaceController
+    public class PartialsController : SurfaceController
     {
 
         private string GetPartialViewPath(string name)
         {
-            return $"~/Views/Partials/PageSnippets/{name}.cshtml";
+            return $"~/Views/Partials/{name}.cshtml";
         }
 
         [ChildActionOnly]
-        [DonutOutputCache(CacheProfile = "OneHour")]
-        public ActionResult NavFooterUpper(int startNodeId)
+        //[DonutOutputCache(CacheProfile = "OneHour")]
+        public ActionResult Menu()
         {
             MenuModel model = new MenuModel(CurrentPage);
             model.Root = Umbraco.ContentAtRoot().First();
             model.Days = model.Root.ChildrenOfType("day");
             return PartialView(GetPartialViewPath("Menu"), model);
         }
+
+        [ChildActionOnly]
+        //[DonutOutputCache(CacheProfile = "OneHour")]
+        public ActionResult ResultsTable()
+        {
+            ResultsTableModel model = new ResultsTableModel(CurrentPage);
+            return PartialView(GetPartialViewPath("ResultsTable"), model);
+        }
+
     }
 }

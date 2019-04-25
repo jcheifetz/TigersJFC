@@ -99,8 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\TeamResult.cs" />
-    <Compile Include="Controllers\Partial Controllers\MenuController.cs" />
+    <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Models\Partial Models\MenuModel.cs" />
+    <Compile Include="Models\Partial Models\ResultsTableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
