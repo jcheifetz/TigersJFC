@@ -1,16 +1,12 @@
-﻿@inherits UmbracoViewPage
-@using System.Collections.Generic;
+﻿@using System.Collections.Generic;
 @using System.Linq;
+@inherits UmbracoViewPage<Website.Logic.Models.Partial_Models.MenuModel>
 @{
 
-
-    var days = root.ChildrenOfType("day");
-
-
-    foreach (var node in root.Children(x => x.ContentType.Alias == "textPage"))
+    foreach (var node in Model.Root.Children(x => x.ContentType.Alias == "textPage"))
     {
-        <li class="nav-item @if (Model.Id == node.Id) {<text>active</text>}">
-            <a href="@(node.Url)" class="nav-link">@(node.Name) @if (Model.Id == node.Id)
+        <li class="nav-item @if (Model.Content.Id == node.Id) {<text>active</text>}">
+            <a href="@(node.Url)" class="nav-link">@(node.Name) @if (Model.Content.Id == node.Id)
             {<span class="sr-only">(current)</span>}</a>
         </li>
     }
@@ -20,7 +16,7 @@
             Fixtures
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            @foreach (var day in days)
+            @foreach (var day in Model.Days)
             {
                 <li>
                     <a class="dropdown-item dropdown-toggle" href="javascript:">@(day.Value<DateTime>("date").ToString("dddd"))</a>

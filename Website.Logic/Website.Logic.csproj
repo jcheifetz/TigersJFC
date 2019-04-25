@@ -98,12 +98,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\TeamResult.cs" />
     <Compile Include="Controllers\Partial Controllers\MenuController.cs" />
-    <Compile Include="Models\Partial Models\Menu.cs" />
+    <Compile Include="Models\Partial Models\MenuModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Application\" />
     <Folder Include="Controllers\Page Controllers\" />
   </ItemGroup>
   <PropertyGroup>
@@ -139,7 +139,7 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>opy /Y "$(TargetDir)$(ProjectName).dll" "C:\_JONATHAN\JON_LOCAL\Clients\Naish\TigersJFC\Website\bin\$(ProjectName).dll"
+    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "C:\_JONATHAN\JON_LOCAL\Clients\Naish\TigersJFC\Website\bin\$(ProjectName).dll"
 copy /Y "$(TargetDir)$(ProjectName).pdb" "C:\_JONATHAN\JON_LOCAL\Clients\Naish\TigersJFC\Website\bin\$(ProjectName).pdb"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
