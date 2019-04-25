@@ -1,30 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.202
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TigersJFC", ".", "{570076E3-EAE3-4E59-AC07-9A793F8E6D61}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website\", "{12E28540-5561-4E4C-9BD5-656C1E1CCA7A}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_34895"
-		Debug.AspNetCompiler.PhysicalPath = "..\TigersJFC\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_34895\"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_3186"
+		Debug.AspNetCompiler.PhysicalPath = "Website\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3186\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_34895"
-		Release.AspNetCompiler.PhysicalPath = "..\TigersJFC\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_34895\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_3186"
+		Release.AspNetCompiler.PhysicalPath = "Website\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3186\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "34895"
-		SlnRelativePath = "..\TigersJFC\"
+		VWDPort = "3186"
+		SlnRelativePath = "Website\"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.logic", "Website.Logic\Website.logic\Website.logic.csproj", "{A45F6573-E45A-4FC9-96B6-C8ACCCB40238}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.Logic", "Website.Logic\Website.Logic.csproj", "{4385722A-00ED-4B6F-9E93-7DA4250B7A26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,14 +32,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{570076E3-EAE3-4E59-AC07-9A793F8E6D61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{570076E3-EAE3-4E59-AC07-9A793F8E6D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{570076E3-EAE3-4E59-AC07-9A793F8E6D61}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{570076E3-EAE3-4E59-AC07-9A793F8E6D61}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{A45F6573-E45A-4FC9-96B6-C8ACCCB40238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A45F6573-E45A-4FC9-96B6-C8ACCCB40238}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A45F6573-E45A-4FC9-96B6-C8ACCCB40238}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A45F6573-E45A-4FC9-96B6-C8ACCCB40238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E28540-5561-4E4C-9BD5-656C1E1CCA7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E28540-5561-4E4C-9BD5-656C1E1CCA7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E28540-5561-4E4C-9BD5-656C1E1CCA7A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E28540-5561-4E4C-9BD5-656C1E1CCA7A}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{4385722A-00ED-4B6F-9E93-7DA4250B7A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4385722A-00ED-4B6F-9E93-7DA4250B7A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4385722A-00ED-4B6F-9E93-7DA4250B7A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4385722A-00ED-4B6F-9E93-7DA4250B7A26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
