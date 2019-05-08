@@ -8,7 +8,7 @@
     //var date = new DateTime(Model.Parent.Value<DateTime>("date").Year, Model.Parent.Value<DateTime>("date").Month, Model.Parent.Value<DateTime>("date").Day, int.Parse(Model.Name.Split(':')[0]), int.Parse(Model.Name.Split(':')[1]),0);
     var fixtures = Model.Children;
 
-
+    
     @section heading {
         <h2 class="subheading">@(Model.Parent.Value<DateTime>("date").ToString("dddd")) - @(Model.Name)</h2>
     }
@@ -36,7 +36,7 @@
                 int awayTeamGoals = fixture.Value<int?>("awayTeamGoals") ?? 0;
 
                 bool finished = (fixture.Value<string>("status") ?? "").ToLower().IndexOf("ended") != -1;
-                bool started = finished || (fixture.Value<string>("status") ?? "").ToLower().IndexOf("started") != -1;
+                bool started = (fixture.Value<string>("status") ?? "").ToLower().IndexOf("started") != -1;
 
 
 
@@ -45,10 +45,12 @@
 
                 <tr>
                     <th scope="row" class="text-right">@(homeTeamName) @(homeTeamGroup)</th>
-                    <td class="text-center">
-                        @if (started)
+                    <td class="text-center" style="position: relative;">
+                        @if (started || finished)
                         {
-                            <span style="min-width: 100px; text-align: center; display: inline-block; padding: 3px 0px; background-color: #ff5555; color: #fff; font-weight: bold;">@(homeTeamGoals) <text>:</text> @(awayTeamGoals)</span>
+                            <span style="font-size: 10px;position: absolute; top: 46px; min-width: 100px; text-align: center; display: inline-block;">@(startTime)</span>
+                            <span style="min-width: 100px; text-align: center; display: inline-block; padding: 3px 0px; background-color: @(started ? "#ffff55; color: #000; " : "#ff5555; color: #fff; ") font-weight: bold;">@(homeTeamGoals) : @(awayTeamGoals)</span>
+
                         }
                         else
                         {

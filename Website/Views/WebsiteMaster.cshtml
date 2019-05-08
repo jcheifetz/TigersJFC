@@ -1,6 +1,10 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
 @{
-	Layout = null;
+    Layout = null;
+
+
+    var root = Umbraco.ContentAtRoot().First();
+    var mastMedia = root.Value<IPublishedContent>("mastheadMedia");
 }
 
 <!DOCTYPE html>
@@ -43,7 +47,7 @@
     <!-- Static navbar -->
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
 
-        <h1 style="align-self: flex-start; padding-top: 0.5rem;"><a href="/">Tigers JFC Tournament 2019</a></h1>
+        <h1 style="align-self: flex-start; padding-top: 0.5rem;"><a href="/">@(root.Value<string>("siteName"))</a></h1>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -58,7 +62,7 @@
 
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url('/img/post-bg.jpg')">
+    <header class="masthead" style="background-image: url('@(mastMedia.Url)')">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">

@@ -3,89 +3,89 @@
 @using Website.Logic.Application;
 @inherits UmbracoViewPage
 @{
-    var root = Umbraco.ContentAtRoot().First();
-    var teams = root.ChildrenOfType("teams").First().ChildrenOfType("team");
-    var days = root.ChildrenOfType("day");
+
     var results = new List<TeamResult>();
+    bool isRoundRobin = Model.ContentType.Alias.ToLower().IndexOf("robin") != -1;
 
-    // init
-    foreach (IPublishedContent team in teams)
+    var fixtures = Model.Children(x => x.ContentType.Alias.IndexOf("fixture") != -1);
+    foreach (var fixture in fixtures)
     {
-        results.Add(new TeamResult() { Name = team.Name, Id = team.Id });
-    }
 
-    // get results by day
-    foreach (IPublishedContent day in days)
-    {
-        var fixtures = day.Descendants().Where(x => x.ContentType.Alias.IndexOf("fixture") != -1);
-        foreach (var fixture in fixtures)
+        var homeTeam = fixture.Value<IPublishedContent>("homeTeam");
+        var awayTeam = fixture.Value<IPublishedContent>("awayTeam");
+
+        if (homeTeam==null || awayTeam == null)
         {
+            continue;
+        }
 
-            var homeTeam = fixture.Value<IPublishedContent>("homeTeam");
-            var awayTeam = fixture.Value<IPublishedContent>("awayTeam");
+        if (results.FirstOrDefault(x => x.Id == homeTeam.Id) == null)
+        {
+            results.Add(new TeamResult() { Name = homeTeam.Name, Id = homeTeam.Id });
+        }
+        if (results.FirstOrDefault(x => x.Id == awayTeam.Id) == null)
+        {
+            results.Add(new TeamResult() { Name = awayTeam.Name, Id = awayTeam.Id });
+        }
 
-            if (homeTeam==null || awayTeam == null)
+
+        int homeTeamGoals = fixture.Value<int?>("homeTeamGoals") ?? 0;
+        int awayTeamGoals = fixture.Value<int?>("awayTeamGoals") ?? 0;
+
+        var homeTeamResult = results.Single(x => x.Id == homeTeam.Id);
+        var awayTeamResult = results.Single(x => x.Id == awayTeam.Id);
+
+        bool finished = (fixture.Value<string>("status") ?? "").ToLower().IndexOf("ended")!=-1;
+
+        if (homeTeamGoals > 0)
+        {
+            homeTeamResult.Goals += homeTeamGoals;
+        }
+        if (awayTeamGoals > 0)
+        {
+            awayTeamResult.Goals += awayTeamGoals;
+        }
+
+        if (finished)
+        {
+            homeTeamResult.Played++;
+            awayTeamResult.Played++;
+
+            if (homeTeamGoals > awayTeamGoals)
             {
-                continue;
+                homeTeamResult.Won++;
+                homeTeamResult.Points += 3;
+                homeTeamResult.GoalDifference = homeTeamGoals - awayTeamGoals;
+            }
+            if (homeTeamGoals == awayTeamGoals)
+            {
+                homeTeamResult.Drew++;
+                homeTeamResult.Points ++;
+            }
+            if (homeTeamGoals < awayTeamGoals)
+            {
+                homeTeamResult.Lost++;
             }
 
-            int homeTeamGoals = fixture.Value<int?>("homeTeamGoals") ?? 0;
-            int awayTeamGoals = fixture.Value<int?>("awayTeamGoals") ?? 0;
 
-            var homeTeamResult = results.Single(x => x.Id == homeTeam.Id);
-            var awayTeamResult = results.Single(x => x.Id == awayTeam.Id);
-
-            bool finished = (fixture.Value<string>("status") ?? "").ToLower().IndexOf("ended")!=-1;
-
-            if (homeTeamGoals > 0)
+            if (awayTeamGoals > homeTeamGoals)
             {
-                homeTeamResult.Goals += homeTeamGoals;
+                awayTeamResult.Won++;
+                awayTeamResult.Points += 3;
+                awayTeamResult.GoalDifference = awayTeamGoals - homeTeamGoals;
             }
-            if (awayTeamGoals > 0)
+            if (awayTeamGoals == homeTeamGoals)
             {
-                awayTeamResult.Goals += awayTeamGoals;
+                awayTeamResult.Drew++;
+                awayTeamResult.Points++;
             }
-
-            if (finished)
+            if (awayTeamGoals < homeTeamGoals)
             {
-                homeTeamResult.Played++;
-                awayTeamResult.Played++;
-
-                if (homeTeamGoals > awayTeamGoals)
-                {
-                    homeTeamResult.Won++;
-                    homeTeamResult.Points += 3;
-                    homeTeamResult.GoalDifference = homeTeamGoals - awayTeamGoals;
-                }
-                if (homeTeamGoals == awayTeamGoals)
-                {
-                    homeTeamResult.Drew++;
-                    homeTeamResult.Points ++;
-                }
-                if (homeTeamGoals < awayTeamGoals)
-                {
-                    homeTeamResult.Lost++;
-                }
-
-
-                if (awayTeamGoals > homeTeamGoals)
-                {
-                    awayTeamResult.Won++;
-                    awayTeamResult.Points += 3;
-                    awayTeamResult.GoalDifference = awayTeamGoals - homeTeamGoals;
-                }
-                if (awayTeamGoals == homeTeamGoals)
-                {
-                    awayTeamResult.Drew++;
-                    awayTeamResult.Points++;
-                }
-                if (awayTeamGoals < homeTeamGoals)
-                {
-                    awayTeamResult.Lost++;
-                }
+                awayTeamResult.Lost++;
             }
         }
     }
+    //}
 
     results.Sort();
 }
@@ -109,8 +109,6 @@
             foreach (var result in results)
             {
                 i++;
-                if (i < 5)
-                {
         <tr>
             <th scope="row">@(i)</th>
             <td>@(result.Name)</td>
@@ -121,7 +119,6 @@
             <td>@(result.GoalDifference)</td>
             <td>@(result.Points)</td>
         </tr>
-                    }
                 }
             }
     </tbody>
