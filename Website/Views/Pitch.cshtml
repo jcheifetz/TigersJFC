@@ -1,21 +1,25 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
 @using System.Globalization;
 @{
-    Layout = "WebsiteMaster.cshtml";
+        Layout = "WebsiteMaster.cshtml";
 
 
 
-    //var date = new DateTime(Model.Parent.Value<DateTime>("date").Year, Model.Parent.Value<DateTime>("date").Month, Model.Parent.Value<DateTime>("date").Day, int.Parse(Model.Name.Split(':')[0]), int.Parse(Model.Name.Split(':')[1]),0);
-    var fixtures = Model.Children;
+        var date = Model.Parent.Value<DateTime>("date");
+        var fixtures = Model.Children;
 
-    
-    @section heading {
-        <h2 class="subheading">@(Model.Parent.Value<DateTime>("date").ToString("dddd")) - @(Model.Name)</h2>
-    }
+
+@section heading {
+        <h1 class="subheading">
+            @(string.Format(new Website.Logic.Application.Helpers.customDateProvider(), "{0}", date))
+
+        </h1>
+    <h2>@(Model.Name)</h2>
+}
 
     @Html.Action("ResultsTable", "Partials")
 
-
+    <h1>Fixtures/Results</h1>
     <table class="table table-striped">
         <thead class="sr-only">
             <tr>
@@ -49,12 +53,12 @@
                         @if (started || finished)
                         {
                             <span style="font-size: 10px;position: absolute; top: 46px; min-width: 100px; text-align: center; display: inline-block;">@(startTime)</span>
-                            <span style="min-width: 100px; text-align: center; display: inline-block; padding: 3px 0px; background-color: @(started ? "#ffff55; color: #000; " : "#ff5555; color: #fff; ") font-weight: bold;">@(homeTeamGoals) : @(awayTeamGoals)</span>
+                            <span style="min-width: 100px; text-align: center; display: inline-block; padding: 3px 0px; background-color: @(started ? "#ffd200; color: #000; " : "#ff0000; color: #fff; ") font-weight: bold;">@(homeTeamGoals) : @(awayTeamGoals)</span>
 
                         }
                         else
                         {
-                            <span style="min-width: 100px; text-align: center; display: inline-block; padding: 3px 0px; background-color: #dddddd; font-weight: bold;">@(startTime)</span>
+                            <span style="min-width: 100px; text-align: center; display: inline-block; padding: 3px 0px; background-color: #c6c6c6; font-weight: bold;">@(startTime)</span>
                         }
                     </td>
                     <td>@(awayTeam) @(awayTeamGroup)</td>
