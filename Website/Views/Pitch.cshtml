@@ -49,16 +49,16 @@
 
                 <tr>
                     <th scope="row" class="text-right">@(homeTeamName) @(homeTeamGroup)</th>
-                    <td class="text-center" style="position: relative;">
+                    <td class="text-center" style="position: relative; @if (started || finished) { @("padding-bottom: 1.0em;")} ">
                         @if (started || finished)
                         {
-                            <span style="font-size: 10px;position: absolute; top: 46px; min-width: 100px; text-align: center; display: inline-block;">@(startTime)</span>
-                            <span style="min-width: 100px; text-align: center; display: inline-block; padding: 3px 0px; background-color: @(started ? "#ffd200; color: #000; " : "#ff0000; color: #fff; ") font-weight: bold;">@(homeTeamGoals) : @(awayTeamGoals)</span>
+                            <span class="startTime">@(startTime)</span>
+                            <span class="score" style="background-color: @(started ? "#ffd200; color: #000; " : "#ff0000; color: #fff; ") font-weight: bold;">@(homeTeamGoals) : @(awayTeamGoals)</span>
 
                         }
                         else
                         {
-                            <span style="min-width: 100px; text-align: center; display: inline-block; padding: 3px 0px; background-color: #c6c6c6; font-weight: bold;">@(startTime)</span>
+                            <span class="mainStartTime">@(startTime)</span>
                         }
                     </td>
                     <td>@(awayTeam) @(awayTeamGroup)</td>

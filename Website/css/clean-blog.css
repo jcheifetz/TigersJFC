@@ -44,12 +44,44 @@ h6 {
 article h1 {
     background: #000; color: #fff;
     padding: 17px 25px;
-    font-size: 28px;
+    font-size: 17px;
 }
 
 .table { margin-bottom: 50px;}
 .table tbody th,.table tbody td { border-bottom: 1px solid #333; }
 .table.results tbody tr:first-of-type th,.table.results tbody tr:first-of-type td { background-color:#ccc; }
+
+.table {
+    font-size: 11px;
+}
+.table td, .table th {
+    vertical-align: middle;
+    padding: 0.4em 0.1em 0.3em 0.1em;
+    line-height: 15px;
+}
+.table .startTime {
+    font-size: 8px;
+    position: absolute; 
+    top: 22px; 
+    min-width: 60px; 
+    text-align: center; 
+    display: inline-block; 
+    z-index: 1;
+}
+.table .score {
+    min-width: 60px; 
+    text-align: center; 
+    display: inline-block; 
+    padding: 3px 0 1px 0; 
+} 
+.table .mainStartTime {
+    min-width: 60px; 
+    text-align: center; 
+    display: inline-block; 
+    padding: 3px 0 1px 0; 
+    background-color: #c6c6c6; 
+    font-weight: bold;
+}
 
 
 nav h1 {
@@ -333,6 +365,30 @@ header.masthead .post-heading .meta a {
   .post-preview > a > .post-title {
     font-size: 36px;
   }
+
+  .table {
+        font-size: 18px;
+   }
+      .table td, .table th {
+        padding: 0.75em;
+        line-height: unset;
+    }
+    .table .startTime {
+        font-size: 10px;
+        top: 46px; 
+        min-width: 100px; 
+    }
+    .table .score {
+        padding: 3px 0px; 
+        min-width: 100px;
+    } 
+    .table .mainStartTime {
+        padding: 3px 0px; 
+        min-width: 100px;
+    }
+    article h1 {
+        font-size: 28px;
+    }
 }
 
 .floating-label-form-group {

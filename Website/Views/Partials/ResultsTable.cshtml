@@ -50,12 +50,12 @@
         {
             homeTeamResult.Played++;
             awayTeamResult.Played++;
-
+            homeTeamResult.GoalDifference = homeTeamGoals - awayTeamGoals;
+            awayTeamResult.GoalDifference = awayTeamGoals - homeTeamGoals;
             if (homeTeamGoals > awayTeamGoals)
             {
                 homeTeamResult.Won++;
                 homeTeamResult.Points += 3;
-                homeTeamResult.GoalDifference = homeTeamGoals - awayTeamGoals;
             }
             if (homeTeamGoals == awayTeamGoals)
             {
@@ -66,13 +66,10 @@
             {
                 homeTeamResult.Lost++;
             }
-
-
             if (awayTeamGoals > homeTeamGoals)
             {
                 awayTeamResult.Won++;
                 awayTeamResult.Points += 3;
-                awayTeamResult.GoalDifference = awayTeamGoals - homeTeamGoals;
             }
             if (awayTeamGoals == homeTeamGoals)
             {
