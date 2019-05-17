@@ -50,8 +50,8 @@
         {
             homeTeamResult.Played++;
             awayTeamResult.Played++;
-            homeTeamResult.GoalDifference = homeTeamGoals - awayTeamGoals;
-            awayTeamResult.GoalDifference = awayTeamGoals - homeTeamGoals;
+            homeTeamResult.GoalDifference += (homeTeamGoals - awayTeamGoals);
+            awayTeamResult.GoalDifference += (awayTeamGoals - homeTeamGoals);
             if (homeTeamGoals > awayTeamGoals)
             {
                 homeTeamResult.Won++;
