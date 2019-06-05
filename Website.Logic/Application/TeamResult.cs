@@ -16,6 +16,7 @@ namespace Website.Logic.Application
             _drew = 0;
             _lost = 0;
             _goals = 0;
+            _goalsAgainst = 0;
             _points = 0;
             _goalDifference = 0;
         }
@@ -26,6 +27,7 @@ namespace Website.Logic.Application
         private int _drew;
         private int _lost;
         private int _goals;
+        private int _goalsAgainst;
         private int _points;
         private int _goalDifference;
 
@@ -109,6 +111,17 @@ namespace Website.Logic.Application
             set
             {
                 _goals = value;
+            }
+        }
+        public int GoalsAgainst
+        {
+            get
+            {
+                return _goalsAgainst;
+            }
+            set
+            {
+                _goalsAgainst = value;
             }
         }
         public int Played

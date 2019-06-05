@@ -40,10 +40,12 @@
         if (homeTeamGoals > 0)
         {
             homeTeamResult.Goals += homeTeamGoals;
+            awayTeamResult.GoalsAgainst += homeTeamGoals;
         }
         if (awayTeamGoals > 0)
         {
             awayTeamResult.Goals += awayTeamGoals;
+            homeTeamResult.GoalsAgainst += awayTeamGoals;
         }
 
         if (finished)
@@ -91,14 +93,16 @@
 <table class="table table-striped results">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col" title="position">#</th>
             <th scope="col">Team</th>
-            <th scope="col">P</th>
-            <th scope="col">W</th>
-            <th scope="col">D</th>
-            <th scope="col">L</th>
-            <th scope="col">GD</th>
-            <th scope="col">PTS</th>
+            <th scope="col" title="Played">P</th>
+            <th scope="col" title="Won">W</th>
+            <th scope="col" title="Draw">D</th>
+            <th scope="col" title="Lost">L</th>
+            <th scope="col" title="For">F</th>
+            <th scope="col" title="Against">A</th>
+            <th scope="col" title="Goal Difference">GD</th>
+            <th scope="col" title="points">PTS</th>
         </tr>
     </thead>
     <tbody>
@@ -114,6 +118,8 @@
             <td>@(result.Won)</td>
             <td>@(result.Drew)</td>
             <td>@(result.Lost)</td>
+            <td>@(result.Goals)</td>
+            <td>@(result.GoalsAgainst)</td>
             <td>@(result.GoalDifference)</td>
             <td>@(result.Points)</td>
         </tr>
